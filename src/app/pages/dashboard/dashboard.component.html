@@ -1,0 +1,128 @@
+<div class="page">
+  <div class="header">
+    <div>
+      <h1 class="title">Dashboard</h1>
+      <p class="sub">Small daily wins. Don’t overwhelm yourself.</p>
+    </div>
+
+    <button mat-stroked-button (click)="refresh()" [disabled]="loading">
+      <mat-icon>refresh</mat-icon>
+      Refresh
+    </button>
+  </div>
+
+  <mat-card class="hero">
+    <mat-card-content>
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="big">
+            <span class="label">Due today</span>
+            <span class="value">
+              {{ loading ? '…' : (stats?.dueCount ?? 0) }}
+            </span>
+          </div>
+
+          <div class="big">
+            <span class="label">New cards available</span>
+            <span class="value">
+              {{ loading ? '…' : (stats?.newCount ?? 0) }}
+            </span>
+          </div>
+
+          <div class="mini">
+            <span class="pill">
+              <mat-icon>style</mat-icon>
+              Decks: {{ loading ? '…' : (stats?.deckCount ?? 0) }}
+            </span>
+            <span class="pill">
+              <mat-icon>collections_bookmark</mat-icon>
+              Cards: {{ loading ? '…' : (stats?.cardCount ?? 0) }}
+            </span>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="progress-row">
+            <div class="progress-text">
+              <div class="progress-title">Learning progress</div>
+              <div class="progress-sub">
+                Introduced {{ stats?.introducedCount ?? 0 }} / {{ stats?.cardCount ?? 0 }}
+                ({{ learnProgressPercent }}%)
+              </div>
+            </div>
+          </div>
+
+          <mat-progress-bar
+            mode="indeterminate"
+            *ngIf="loading"
+          ></mat-progress-bar>
+
+          <mat-progress-bar
+            mode="determinate"
+            [value]="learnProgressPercent"
+            *ngIf="!loading"
+          ></mat-progress-bar>
+
+          <div class="cta">
+            <a mat-flat-button color="primary" routerLink="/review">
+              <mat-icon>play_arrow</mat-icon>
+              Start Review
+            </a>
+
+            <a mat-stroked-button routerLink="/learn">
+              <mat-icon>school</mat-icon>
+              Learn New
+            </a>
+          </div>
+
+          <div class="note" *ngIf="!loading && (stats?.dueCount ?? 0) === 0">
+            No reviews due right now — perfect time to learn 5 new cards or do a dialogue.
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="grid">
+    <mat-card class="tile">
+      <mat-card-title>Daily plan (10–15 min)</mat-card-title>
+      <mat-card-content>
+        <ol class="plan">
+          <li>Review due cards</li>
+          <li>Learn 5 new cards</li>
+          <li>1 short dialogue (optional)</li>
+        </ol>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <a mat-button routerLink="/review"><mat-icon>repeat</mat-icon> Review</a>
+        <a mat-button routerLink="/learn"><mat-icon>add_circle</mat-icon> Learn</a>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="tile">
+      <mat-card-title>Manage content</mat-card-title>
+      <mat-card-content>
+        <p class="muted">
+          Keep decks small and focused (Core A1, Verbs, Travel). The app works best with bite-sized decks.
+        </p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <a mat-button routerLink="/decks"><mat-icon>style</mat-icon> Decks</a>
+        <a mat-button routerLink="/dialogues"><mat-icon>record_voice_over</mat-icon> Dialogues</a>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="tile">
+      <mat-card-title>Quick tip</mat-card-title>
+      <mat-card-content>
+        <p class="muted">
+          Fast learning comes from active recall. When you review, try to say it out loud before revealing.
+        </p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <a mat-button routerLink="/settings"><mat-icon>settings</mat-icon> Settings</a>
+        <a mat-button routerLink="/stats"><mat-icon>insights</mat-icon> Stats</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

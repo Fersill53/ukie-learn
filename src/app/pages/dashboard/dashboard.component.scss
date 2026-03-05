@@ -1,0 +1,133 @@
+.page {
+  display: grid;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.sub {
+  margin: 4px 0 0;
+  opacity: 0.75;
+}
+
+.hero {
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 16px;
+}
+
+.hero-left {
+  display: grid;
+  gap: 12px;
+}
+
+.big {
+  display: grid;
+  gap: 4px;
+}
+
+.label {
+  font-size: 12px;
+  opacity: 0.75;
+  letter-spacing: 0.2px;
+}
+
+.value {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.04);
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.pill mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.hero-right {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.progress-title {
+  font-weight: 700;
+}
+
+.progress-sub {
+  opacity: 0.75;
+  font-size: 13px;
+}
+
+.cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.note {
+  font-size: 13px;
+  opacity: 0.75;
+  line-height: 1.35;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tile .muted {
+  margin: 0;
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+.plan {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

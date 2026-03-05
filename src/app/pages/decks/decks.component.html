@@ -1,0 +1,82 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1 class="title">Decks</h1>
+      <p class="sub">Build your Ukrainian content in small, focused decks.</p>
+    </div>
+
+    <button mat-stroked-button (click)="refresh()" [disabled]="loading">
+      <mat-icon>refresh</mat-icon>
+      Refresh
+    </button>
+  </div>
+
+  <mat-card class="add-card">
+    <mat-card-title>Create a deck</mat-card-title>
+    <mat-card-content>
+      <form class="form" [formGroup]="addForm" (ngSubmit)="addDeck()">
+        <mat-form-field appearance="outline">
+          <mat-label>Deck name</mat-label>
+          <input matInput formControlName="name" placeholder="Core A1, Verbs, Travel…" />
+          <mat-error *ngIf="addForm.controls.name.touched && addForm.controls.name.invalid">
+            Enter a name (2–60 chars)
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Level</mat-label>
+          <mat-select formControlName="level">
+            <mat-option *ngFor="let lvl of levels" [value]="lvl">{{ lvl }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="span-2">
+          <mat-label>Description (optional)</mat-label>
+          <input matInput formControlName="description" placeholder="What is this deck for?" />
+        </mat-form-field>
+
+        <div class="actions span-2">
+          <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+            <mat-icon>add</mat-icon>
+            Add deck
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-divider class="divider"></mat-divider>
+
+  <div *ngIf="loading" class="state">Loading decks…</div>
+
+  <div *ngIf="!loading && decks.length === 0" class="state">
+    No decks yet. Create your first one above.
+  </div>
+
+  <div class="grid" *ngIf="!loading && decks.length > 0">
+    <mat-card class="deck" *ngFor="let deck of decks; trackBy: trackById">
+      <mat-card-header>
+        <mat-card-title>{{ deck.name }}</mat-card-title>
+        <mat-card-subtitle>{{ deck.level }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="desc" *ngIf="deck.description">{{ deck.description }}</p>
+        <p class="desc muted" *ngIf="!deck.description">No description</p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <!-- If you have /decks/:id, change routerLink to ['/decks', deck.id] -->
+        <a mat-button color="primary" routerLink="/decks">
+          <mat-icon>visibility</mat-icon>
+          Open
+        </a>
+
+        <button mat-button color="warn" (click)="deleteDeck(deck)">
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
